@@ -36,6 +36,10 @@ func main() {
 func handler(w http.ResponseWriter, r *http.Request) {
 	log.Printf("%s [%s]", r.RemoteAddr, r.RequestURI)
 	w.Header().Set("Content-type", "text/html")
+	w.Header().Set("Connection", "close")
+	w.Header().Set("Cache-Control", "no-cache, no-store, must-revalidate")
+	w.Header().Set("Pragma", "no-cache")
+	w.Header().Set("Expires", "0")
 	fmt.Fprintf(w, "<b>My hostname</b>: %s<br>", hostname)
 	fmt.Fprintf(w, "<b>My PID</b>: %s<p>", pid)
 	fmt.Fprintf(w, "<b>Client address</b>: %s<p>", r.RemoteAddr)
